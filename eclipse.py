@@ -166,6 +166,15 @@ def sysinfo():
     input ("Press any key to return to Main Menu..")
     main_menu()
 
+def devmisc(): #fix
+
+    time.sleep(1)
+
+def sms():
+    clear()
+
+    os.system("sudo bash scrp/sms.sh")
+
 ###
 
 #menu for spoof mac
