@@ -41,6 +41,7 @@ def handleexit():
 
     signal.signal(signal.SIGINT, signal_handler)
 
+#convert to standalone
 #checks for super user perms
 def permissions():
     clear()
@@ -48,7 +49,8 @@ def permissions():
         print(color.lightred + "You need to run this script with sudo or as root.")
         time.sleep(0.3)
         quit()
-
+        
+#convert to standalone
 #varifies os is Linux or quits
 def getos():
     osys=platform.system()
@@ -57,6 +59,7 @@ def getos():
         time.sleep(2)
         quit()
 
+#convert to standalone
 #checks for dns connection by pinging google
 def internet_on(host="8.8.8.8", port=53, timeout=3):
 
@@ -150,6 +153,7 @@ def selectnet():
     time.sleep(2)
     main_menu()
 
+#convert to standalone
 def publicip():   #fix to check internet/dns
     os.system("curl ipinfo.io/ip > /tmp/ip.txt")
     var = sp.getoutput("cat /tmp/ip.txt")
@@ -591,7 +595,6 @@ hardware_menu_actions = {
 }
 
 ###
-
 
 scan_menu_actions  = {}  
 
