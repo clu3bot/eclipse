@@ -26,6 +26,8 @@ check_for_updates () {
         fi
 }
 
-initital() {
+initial() {
     check_for_updates
 }
+
+initial
