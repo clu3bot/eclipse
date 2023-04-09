@@ -86,7 +86,7 @@ def display():
     check_all()
     print ("100%")
     clear()
-    print("No problems detected\n")
+    print("No problems detected.. If you are still expierencing a problem or bug please submit an Issue on the eclipse repo\n")
     input("Press anything to close..")
     exit()
 display()
