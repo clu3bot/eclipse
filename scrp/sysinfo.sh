@@ -82,26 +82,7 @@ net_pkg() {
 
 # check distro info for counting n.o of packages accordingly
 distro_detect() {
-    os="$(uname -o)"
-    case "${os}" in
-	Android)
-	   distro="Android"
-	   if [ ! -f "${HOME}"/.termux/fonts/Material.ttf ];then
-		cp fonts/* "${HOME}"/.termux/fonts/
-		termux-reload-settings
-	   fi
-	   ;;
-	*)
-	   distro="$(source /etc/os-release && echo "${PRETTY_NAME}")"
-       if [ ! -d $HOME/.local/share/fonts ]; then
-        mkdir -p $HOME/.local/share/fonts
-       fi
-	   if [ ! -f $HOME/.local/share/fonts/Material.ttf ] && [ ! -f /usr/share/fonts/Material.ttf ]; then
-		cp -r ttf-material-design-icons/* $HOME/.local/share/fonts
-		fc-cache -vf &>/dev/null
-	   fi
-	   ;;
-    esac
+	distro="$(source /etc/os-release && echo "${PRETTY_NAME}")"
 }
 
 storage_info() {
@@ -116,12 +97,12 @@ get_mem () {
 # fetch output
 distro_detect
 storage_info
-echo -e "\n    ${c1}os${c3}    ${distro} $(uname -m)"
-echo -e "    ${c2}ker${c3}   $(uname -r)"
-echo -e "    ${c7}pkgs${c3}  $(net_pkg)"
-echo -e "    ${c4}sh${c3}    $(basename "${SHELL}")"
-echo -e "    ${c6}ram${c3}   $(get_mem)"
-echo -e "    ${c1}init${c3}  $(get_init)"
-echo -e "    ${c7}up${c3}   $(uptime -p | sed 's/up//')"
-echo -e "    ${c4}disk${c3}  $storageused / $storageavail\n"
+echo -e "\n${c1}os${c3}    ${distro} $(uname -m)"
+echo -e "${c2}kernal${c3}   $(uname -r)"
+echo -e "${c7}packages${c3}  $(net_pkg)"
+echo -e "${c4}shell${c3}    $(basename "${SHELL}")"
+echo -e "${c6}ram${c3}   $(get_mem)"
+echo -e "${c1}init${c3}  $(get_init)"
+echo -e "${c7}uptime${c3}   $(uptime -p | sed 's/up//')"
+echo -e "${c4}disk${c3}  $storageused / $storageavail\n"
 echo -e "               \033[0m"

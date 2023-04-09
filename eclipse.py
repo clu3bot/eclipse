@@ -41,16 +41,14 @@ def handleexit():
 
     signal.signal(signal.SIGINT, signal_handler)
 
-#convert to standalone
 #checks for super user perms
 def permissions():
     clear()
     if not os.environ.get("SUDO_UID") and os.geteuid() != 0:
         print(color.lightred + "You need to run this script with sudo or as root.")
-        time.sleep(0.3)
+        time.sleep(1)
         quit()
-        
-#convert to standalone
+
 #varifies os is Linux or quits
 def getos():
     osys=platform.system()
@@ -59,7 +57,6 @@ def getos():
         time.sleep(2)
         quit()
 
-#convert to standalone
 #checks for dns connection by pinging google
 def internet_on(host="8.8.8.8", port=53, timeout=3):
 
@@ -88,7 +85,7 @@ def iptrace():
 def check_install():
     check = sp.getoutput("cat etc/done_flag.txt")
     if check == 'done':
-        time.sleep(1)
+        pass
     else:
         print(color.red+"Run install.py")
         exit()
@@ -150,18 +147,16 @@ def selectintmainmenu():
 def selectnet():
     clear()
     os.system("sudo bash scrp/networkselect.sh")
-    time.sleep(2)
     main_menu()
 
-#convert to standalone
 def publicip():   #fix to check internet/dns
-    os.system("curl ipinfo.io/ip > /tmp/ip.txt")
-    var = sp.getoutput("cat /tmp/ip.txt")
-    os.system("rm -rf /tmp/ip.txt")
-    clear()
-    print("Your public IP address is:"+color.green+var+color.none)
-    input("\nPress any key to return to main menu..")
-    main_menu()
+    if internet_on() is True:
+        with open("scrp/publicip.py") as f:
+            exec(f.read())
+        main_menu()
+    else:
+        print ("This requires internet.. Returning to Main Menu")
+        time.sleep(2)
 
 #function to call system info script
 def sysinfo():
@@ -228,17 +223,14 @@ def exit():
 #defines the options for the main menu
 def spoofmacoption0():
     print ("random mac")
-    time.sleep(2)
     main_menu()
 
 def spoofmacoption1():
     print ("choose mac")
-    time.sleep(2)    
     wifi_menu()
 
 def spoofmacoption2():
-    print ("reset to original mac")
-    time.sleep(2)    
+    print ("reset to original mac")  
     bluetooth_menu()
 
 spoofmenu_actions = {
@@ -303,7 +295,6 @@ def exit():
 #defines the options for the main menu
 def miscoption0():
     print ("option 0")
-    time.sleep(2)
     misc_menu()
 
 def miscoption1():
@@ -317,52 +308,42 @@ def miscoption3():
 
 def miscoption4():
     print ("option 4")
-    time.sleep(2)
     misc_menu()
 
 def miscoption5():
-    print ("option 5")
-    time.sleep(2)    
+    print ("option 5")  
     misc_menu()
 
 def miscoption6():
-    print ("option 6")
-    time.sleep(2)    
+    print ("option 6")  
     misc_menu()
 
 def miscoption7():
     print ("option 7")
-    time.sleep(2)
     misc_menu()
 
 def miscoption8():
     print ("option 8")
-    time.sleep(2)
     misc_menu()
 
 def miscoption9():
     print ("option 9")
-    time.sleep(2)
     misc_menu()
 
 def miscoption10():
     print ("option 10")
-    time.sleep(2)
     misc_menu()
 
 def miscoption11():
     print ("option 11")
-    time.sleep(2)
     misc_menu()
 
 def miscoption12():
     print ("option 12")
-    time.sleep(2)
     misc_menu()
 
 def miscoption13():
     print ("option 13")
-    time.sleep(2)
     misc_menu()
 
 #binds the options to numbers
@@ -443,57 +424,46 @@ def cryptooption2():
 
 def cryptooption3():
     print ("option 3")
-    time.sleep(2)
     crypto_menu()
 
 def cryptooption4():
     print ("option 4")
-    time.sleep(2)
     crypto_menu()
 
 def cryptooption5():
-    print ("option 5")
-    time.sleep(2)    
+    print ("option 5")  
     crypto_menu()
 
 def cryptooption6():
-    print ("option 6")
-    time.sleep(2)    
+    print ("option 6")  
     crypto_menu()
 
 def cryptooption7():
     print ("option 7")
-    time.sleep(2)
     crypto_menu()
 
 def cryptooption8():
     print ("option 8")
-    time.sleep(2)
     crypto_menu()
 
 def cryptooption9():
     print ("option 9")
-    time.sleep(2)
     crypto_menu()
 
 def cryptooption10():
     print ("option 10")
-    time.sleep(2)
     crypto_menu()
 
 def cryptooption11():
     print ("option 11")
-    time.sleep(2)
     crypto_menu()
 
 def cryptooption12():
     print ("option 12")
-    time.sleep(2)
     crypto_menu()
 
 def cryptooption13():
     print ("option 13")
-    time.sleep(2)
     crypto_menu()
 
 #binds the options to numbers
@@ -565,22 +535,18 @@ def exit():
 #defines the options for the main menu
 def hardwareoption0():
     print ("option 0")
-    time.sleep(2)
     hardware_menu()
 
 def hardwareoption1():
-    print ("wifi option 1")
-    time.sleep(2)    
+    print ("wifi option 1") 
     hardware_menu()
 
 def hardwareoption2():
-    print ("option 2")
-    time.sleep(2)    
+    print ("option 2")  
     hardware_menu()
 
 def hardwareoption3():
     print ("option 3")
-    time.sleep(2)
     hardware_menu()
 
 #binds the options to numbers
@@ -595,6 +561,7 @@ hardware_menu_actions = {
 }
 
 ###
+
 
 scan_menu_actions  = {}  
 
@@ -646,37 +613,30 @@ def exit():
 #defines the options for the main menu
 def scanoption0():
     print ("option 0")
-    time.sleep(2)
     scan_menu()
 
 def scanoption1():
-    print ("wifi option 1")
-    time.sleep(2)    
+    print ("wifi option 1")   
     scan_menu()
 
 def scanoption2():
-    print ("option 2")
-    time.sleep(2)    
+    print ("option 2") 
     scan_menu()
 
 def scanoption3():
     print ("option 3")
-    time.sleep(2)
     scan_menu()
 
 def scanoption4():
     print ("option 4")
-    time.sleep(2)
     scan_menu()
 
 def scanoption5():
-    print ("option 5")
-    time.sleep(2)    
+    print ("option 5") 
     scan_menu()
 
 def scanoption6():
-    print ("option 6")
-    time.sleep(2)    
+    print ("option 6") 
     scan_menu()
 
 
@@ -743,18 +703,15 @@ def exit():
 #defines the options for the main menu
 
 def btoption1():
-    print ("wifi option 1")
-    time.sleep(2)    
+    print ("wifi option 1") 
     bluetooth_menu()
 
 def btoption2():
-    print ("option 2")
-    time.sleep(2)    
+    print ("option 2")   
     bluetooth_menu()
 
 def btoption3():
     print ("option 3")
-    time.sleep(2)
     bluetooth_menu()
 
 
@@ -906,7 +863,20 @@ def main_menu():
     #    pass
     #else:
     #    print(color.lightred+"Error")
-    clear()    
+    clear()
+    print(r"""  
+ ██████████          ████   ███                            
+░░███░░░░░█         ░░███  ░░░                             
+ ░███  █ ░   ██████  ░███  ████  ████████   █████   ██████ 
+ ░██████    ███░░███ ░███ ░░███ ░░███░░███ ███░░   ███░░███
+ ░███░░█   ░███ ░░░  ░███  ░███  ░███ ░███░░█████ ░███████ 
+ ░███ ░   █░███  ███ ░███  ░███  ░███ ░███ ░░░░███░███░░░  
+ ██████████░░██████  █████ █████ ░███████  ██████ ░░██████ 
+░░░░░░░░░░  ░░░░░░  ░░░░░ ░░░░░  ░███░░░  ░░░░░░   ░░░░░░  
+                                 ░███                      
+                                 █████                     
+                                ░░░░░                      
+""")    
     print ("By "+nvar.user+", "+nvar.date+ "       Version: "+color.green+ nvar.version+color.none+"     Interface: "+color.green+interfacecurrent+color.none+    "    Network: "+color.green+essid+color.none)
     print ("Detailed documentation on the eclipse wiki found on https://github.com/clu3bot/eclipse\n\n") 
     print ("[0] Search for a tool.\n")
@@ -953,56 +923,43 @@ def option0():
     time.sleep(2)
 #    searchvar()
 
-def option1():
-    time.sleep(2)    
+def option1():  
     wifi_menu()
 
-def option2():
-    time.sleep(2)    
+def option2(): 
     bluetooth_menu()
 
 def option3():
-    time.sleep(2)
     scan_menu()
 
-def option5():
-    time.sleep(2)    
+def option5(): 
     hardware_menu()
 
-def option6():
-    time.sleep(2)    
+def option6():    
     crypto_menu()
 
 def option7():
-    time.sleep(2)
     misc_menu()
 
 def option8():
-    time.sleep(2)
     spoof_menu()
 
 def option9():
-    time.sleep(2)
     monitoron()
 
 def option10():
-    time.sleep(2)
     monitoroff()
 
 def option11():
-    time.sleep(2)
     selectintmainmenu()
 
 def option12():
-    time.sleep(2)
     selectnet()
 
 def option13():
-    time.sleep(2)
     publicip()
 
 def option14():
-    time.sleep(2)
     sysinfo()
 
 def update():
@@ -1040,10 +997,16 @@ def onstartup():
     if interfacecurrent is None:
         selectint()
     else:
-        time.sleep(0.5)
+        pass
     if os.path.isfile("install.sh"):
         print ("please run the install.sh file in the "+nvar.project+"/ directory")
     else:
-        time.sleep(0.5)
+        pass
+    if os.path.isfile("scrp/animate.py"):
+        with open("scrp/animate.py") as f:
+            exec(f.read())
+            main_menu()
+    else:
+        pass
         main_menu()
 onstartup()
