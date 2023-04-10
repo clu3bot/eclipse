@@ -733,6 +733,7 @@ def beaconspam():
 
 def arpscan():
     os.system("sudo bash scrp/wifitools/arpscan.sh")
+    main_menu()
 
 def authdos():
     pass

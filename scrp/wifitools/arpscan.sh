@@ -1,18 +1,17 @@
 #!/bin/bash
 
 getvar() {
-int=$(sudo python3 scrp/inthandler/rename.py)
+int=$(cat scrp/inthandler/tmp/tmpint.txt)
 }
 
 #saves the output of the arp scan
 arp_output () {
-        sudo arp-scan -I $int -l | awk 'NR > 3' | head -n -3 > tmp/arpoutput-01.txt
+        sudo arp-scan -I $int -l | awk 'NR > 3' | head -n -3 &> scrp/wifitools/tmp/arpoutput-01.csv
 }
 
 #runs and arp scan and asks if user wants to save the output after
 arp_command () {
             sudo arp-scan -I $int -l | awk 'NR > 3' | head -n -3
-            echo -e "\nSave this output to a file? (Y/N)"
        
 }
 
@@ -20,30 +19,21 @@ arp_command () {
 arp_scan () {
 clear
 arp_command &
-echo -e "Scanning.." && sleep 2;
-clear
-echo -e "Output:"
+echo -e "Scanning..\n" && sleep 2;
+echo -e "\nOutput:"
+echo -e "\nSave this output to a file? (Y/N)"
 read -r r
 if [[ "$r" == ["yY"]* ]]; then
-        arp_output &
+        arp_output
+        clear
 	echo -e "Saving Output to file."
-        sleep 0.7
-        clear
-        echo -e "Saving Output to file.."
-        sleep 0.7
-        clear
-        echo -e "Saving Output to file..."
-        sleep 0.7
-        clear
         sleep 1
-        echo -e "File has been saved as tmp/arpoutput-01.txt"
+        echo -e "File has been saved as scrp/wifitools/tmp/arpoutput-01.txt"
         sleep 2
-        main_menu;
 else
         clear
         echo -e "Returning to Main Menu.."
 	sleep 1.5
-        main_menu;
 fi
 }
 
