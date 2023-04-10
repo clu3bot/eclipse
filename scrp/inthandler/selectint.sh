@@ -1,4 +1,6 @@
 #!/bin/bash
+red="\033[1;31m"
+reset="\033[0m"
 
 output() {
         unset $var
@@ -11,12 +13,12 @@ output() {
                 read -r -p "Select:" x
                 if [ "$x" -gt "$y" ]; then
                         clear
-                        echo -e "Selection Invalid.. Select Again"
+                        echo -e $red"Selection Invalid.. Select Again"$reset
                         sleep 2
                         output
                 elif [[ "$x" != ?(-)+([[:digit:]]) ]]; then
                         clear
-                        echo -e "Selection Invalid.. Select Again"
+                        echo -e $red"Selection Invalid.. Select Again"$reset
                         sleep 2
                         output
                 else

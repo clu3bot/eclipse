@@ -831,6 +831,7 @@ def wifioption6():
 def wifioption7():
     arpscancall()
 
+####
 
 #binds the options to numbers
 wifi_menu_actions = {
@@ -846,8 +847,52 @@ wifi_menu_actions = {
     'x': exit,
 }
 
-def animation():
+#settings menu
+
+def settings():
     clear()
+    if os.path.isfile("tmp/animatesetting.txt"):
+        pass
+    else:
+        clear()
+        print ("It Appears your copy of Eclipse is missing a config file, would you like to restore to default?")
+        optionset = input("\n(y/n)\n")
+        optionset = optionset.lower()
+        if optionset == "y":
+            os.system("echo 1 >tmp/animatesetting.txt")
+            print ("Restart Eclipse to update changes..")
+            time.sleep(1)
+            print ("Terminating..")
+            time.sleep(1)
+            quit()
+        else:
+            pass
+    animate = sp.getoutput("cat tmp/animatesetting.txt")
+    print ("Settings Menu:\n")
+    if animate == "1":
+        print ("[1] Intro Inimation ["+color.green+"On"+color.none+"]")
+    elif animate == "0":
+        print ("[1] Intro Inimation ["+color.lightred+"Off"+color.none+"]")
+    else:
+        pass
+    print ("[b] back")
+    setting = input("\nSelect to Toggle:")
+    if setting == "1":
+        if animate == "1":
+            animate = 0
+            os.system("echo 0 > tmp/animatesetting.txt")
+            settings()
+        elif animate == "0":
+            animate = 1
+            os.system("echo 1 > tmp/animatesetting.txt")
+            print ("Restart Eclipse to update changes..")
+            settings()
+    elif setting == "b":
+        main_menu()
+    else:
+        pass
+        settings()
+        
 
 #defines the main menu
 menu_actions  = {}  
@@ -890,6 +935,7 @@ def main_menu():
     print ("[5] Cryptography Tools"+"       [13] Show System Info")
     print ("[6] Misc Tools"+"               ["+color.lightred+"x"+color.none+"] exit")
     print ("                             ["+color.lightred+"u"+color.none+"] check for updates")
+    print ("                             ["+color.lightred+"s"+color.none+"] settings")
     print ("\n")
     choice = input("\n>>  ")
     exec_menu(choice)
@@ -982,6 +1028,7 @@ menu_actions = {
     '11': option12,
     '12': option13,
     '13': option14,
+    's' : settings,
     'b': back,
     'x': exit,
     'u': update,
@@ -1003,10 +1050,18 @@ def onstartup():
         print ("please run the install.sh file in the "+nvar.project+"/ directory")
     else:
         pass
-    if os.path.isfile("scrp/animate.py"):
-        with open("scrp/animate.py") as f:
-            exec(f.read())
+    animate = sp.getoutput("cat tmp/animatesetting.txt")
+    if animate == "1":
+        if os.path.isfile("scrp/animate.py"):
+            with open("scrp/animate.py") as f:
+                exec(f.read())
+                main_menu()
+        else:
+            pass
             main_menu()
+    elif animate == "0":
+        pass
+        main_menu()
     else:
         pass
         main_menu()
