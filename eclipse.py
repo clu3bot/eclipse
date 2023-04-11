@@ -851,7 +851,7 @@ wifi_menu_actions = {
 
 def settings():
     clear()
-    if os.path.isfile("tmp/animatesetting.txt"):
+    if os.path.isfile("bin/config/eclipse_config_animate.config"):
         pass
     else:
         clear()
@@ -859,7 +859,7 @@ def settings():
         optionset = input("\n(y/n)\n")
         optionset = optionset.lower()
         if optionset == "y":
-            os.system("echo 1 >tmp/animatesetting.txt")
+            os.system("echo 1 > bin/config/eclipse_config_animate.config")
             print ("Restart Eclipse to update changes..")
             time.sleep(1)
             print ("Terminating..")
@@ -867,7 +867,7 @@ def settings():
             quit()
         else:
             pass
-    animate = sp.getoutput("cat tmp/animatesetting.txt")
+    animate = sp.getoutput("cat bin/config/eclipse_config_animate.config")
     print ("Settings Menu:\n")
     if animate == "1":
         print ("[1] Intro Inimation ["+color.green+"On"+color.none+"]")
@@ -880,11 +880,11 @@ def settings():
     if setting == "1":
         if animate == "1":
             animate = 0
-            os.system("echo 0 > tmp/animatesetting.txt")
+            os.system("echo 0 > bin/config/eclipse_config_animate.config")
             settings()
         elif animate == "0":
             animate = 1
-            os.system("echo 1 > tmp/animatesetting.txt")
+            os.system("echo 1 > bin/config/eclipse_config_animate.config")
             print ("Restart Eclipse to update changes..")
             settings()
     elif setting == "b":
@@ -1050,7 +1050,7 @@ def onstartup():
         print ("please run the install.sh file in the "+nvar.project+"/ directory")
     else:
         pass
-    animate = sp.getoutput("cat tmp/animatesetting.txt")
+    animate = sp.getoutput("cat bin/config/eclipse_config_animate.config")
     if animate == "1":
         if os.path.isfile("scrp/animate.py"):
             with open("scrp/animate.py") as f:
