@@ -19,7 +19,7 @@ def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 global interface 
-interface = sp.getoutput("cat scrp/wifitools/tmp/int.txt")
+interface = sp.getoutput("cat scrp/wifitools/tmp/int.csv")
 
 def beaconrandomnames():
     clear()
@@ -31,8 +31,8 @@ def beaconrandomnames():
 def beaconnamesfile():
     clear()
     print ("File must be located in "+color.lightred+" /cora/scrp/wifitools/ess"+color.none)
-    if os.path.isfile("scrp/wifitools/ess/file.txt"):
-        defaultfile = sp.getoutput("scrp/wifitools/ess/file.txt")
+    if os.path.isfile("scrp/wifitools/ess/file.csv"):
+        defaultfile = sp.getoutput("scrp/wifitools/ess/file.csv")
     else:
         defaultfile = "Null"
 
@@ -43,18 +43,18 @@ def beaconnamesfile():
     elif asklower == "n":
         clear()
         print ("File must be located in "+color.lightred+" /cora/scrp/wifitools/ess"+color.none)
-        file = input ("What is the name of the file Including file extention. Example "+color.lightgreen+"file.txt"+color.none+": ")
+        file = input ("What is the name of the file Including file extention. Example "+color.lightgreen+"file.csv"+color.none+": ")
     else:
         clear()
         print ("File must be located in "+color.lightred+" /cora/scrp/wifitools/ess"+color.none)
-        file = input ("What is the name of the file Including file extention. Example "+color.lightgreen+"file.txt"+color.none+": ")
+        file = input ("What is the name of the file Including file extention. Example "+color.lightgreen+"file.csv"+color.none+": ")
 
     if os.path.isfile("scrp/wifitools/ess/"+file):
         question = input ("Would you like to set this File as your Default File? (Y/N)")
 
         lowquestion = question.lower()
         if lowquestion == "y":
-            os.system("echo "+file+" > scrp/wifitools/ess/file.txt")
+            os.system("echo "+file+" > scrp/wifitools/ess/file.csv")
         elif lowquestion == "n":
             time.sleep(1)
         else:

@@ -37,7 +37,7 @@ def ask():
 
     userchoicelower = userchoice.lower()
     if userchoicelower == 'y':
-        os.system("echo "+rotstr+" > backupstrs/rotstr.txt")
+        os.system("echo "+rotstr+" > backupstrs/rotstr.csv")
         print ("File saved to cora/etc/crypto/backupstrs/")
     elif userchoicelower == 'n':
         time.sleep(1)

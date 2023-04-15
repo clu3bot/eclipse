@@ -282,7 +282,7 @@ def prompt():
 
 def export_done_flag():
     done_flag = 'done'
-    os.system("echo "+done_flag+" > etc/done_flag.txt")
+    os.system("echo "+done_flag+" > etc/done_flag.csv")
 
 def initialload():
     check_mdk3()

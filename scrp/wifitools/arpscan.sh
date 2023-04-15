@@ -1,7 +1,7 @@
 #!/bin/bash
 
 getvar() {
-int=$(cat scrp/inthandler/tmp/tmpint.txt)
+int=$(cat scrp/inthandler/tmp/tmpint.csv)
 }
 
 #saves the output of the arp scan
@@ -28,7 +28,7 @@ if [[ "$r" == ["yY"]* ]]; then
         clear
 	echo -e "Saving Output to file."
         sleep 1
-        echo -e "File has been saved as scrp/wifitools/tmp/arpoutput-01.txt"
+        echo -e "File has been saved as scrp/wifitools/tmp/arpoutput-01.csv"
         sleep 2
 else
         clear

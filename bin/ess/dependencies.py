@@ -36,10 +36,10 @@ getos()
 
 
 def check_file():
-    file = exists("tmp/flag.txt")
+    file = exists("tmp/flag.csv")
 
     if file == 'True':
-        os.system("rm -rf tmp/flag.txt")
+        os.system("rm -rf tmp/flag.csv")
     else:
         time.sleep(0.5)
 
@@ -113,7 +113,7 @@ def export():
         time.sleep(1)
     
     if flag == 'null':
-        os.system("echo "+flag+" > tmp/flag.txt")
+        os.system("echo "+flag+" > tmp/flag.csv")
     else:
         check_file()
 

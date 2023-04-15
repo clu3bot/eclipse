@@ -21,9 +21,9 @@ def clear():
 
 
 def publicip():
-    os.system("curl ipinfo.io/ip > /tmp/ip.txt")
-    var = sp.getoutput("cat /tmp/ip.txt")
-    os.system("rm -rf /tmp/ip.txt")
+    os.system("curl ipinfo.io/ip > /tmp/ip.csv")
+    var = sp.getoutput("cat /tmp/ip.csv")
+    os.system("rm -rf /tmp/ip.csv")
     clear()
     print("Your public IP address is:"+color.green+var+color.none)
     input("\nPress any key to return to main menu..")

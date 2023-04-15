@@ -19,7 +19,7 @@ def clear(): #clear
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def downloads(): #checks if downloads has been run.
-    check = sp.getoutput("cat etc/done_flag.txt")
+    check = sp.getoutput("cat etc/done_flag.csv")
 
     if check == 'done':
         flag_downloads = 1
@@ -48,7 +48,7 @@ def getos(): # checks if system is linux
 
 def dependencies():
     os.system("python3 bin/ess/dependencies.py")
-    check = sp.getoutput("cat bin/ess/tmp/flag.txt")
+    check = sp.getoutput("cat bin/ess/tmp/flag.csv")
 
     if check == 'null':
         flag_dependencies = 0

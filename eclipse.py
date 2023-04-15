@@ -83,7 +83,7 @@ def iptrace():
 
 #checks if the flag created by install.py exists to varify install requirements have been checked.
 def check_install():
-    check = sp.getoutput("cat etc/done_flag.txt")
+    check = sp.getoutput("cat etc/done_flag.csv")
     if check == 'done':
         pass
     else:
@@ -125,8 +125,8 @@ def selectint():
     getinterface()
 
 def check_essid():
-    if os.path.exists("scrp/tmp/essid.txt"):
-        essid = sp.getoutput("cat scrp/tmp/essid.txt")
+    if os.path.exists("scrp/tmp/essid.csv"):
+        essid = sp.getoutput("cat scrp/tmp/essid.csv")
         return essid
     else:
         essid = "N/A"
@@ -146,7 +146,7 @@ def selectintmainmenu():
 
 def selectnet():
     clear()
-    os.system("sudo bash scrp/networkselect.sh")
+    os.system("sudo bash scrp/network.sh")
     main_menu()
 
 def publicip():   #fix to check internet/dns
@@ -182,7 +182,7 @@ spoofmenu_actions  = {}
 def spoof_menu():
 
     handleexit()
-    var = sp.getoutput("cat tmp/var.txt")
+    var = sp.getoutput("cat tmp/var.csv")
     clear()
     print ("Mac Adress Options")
     print ("By "+nvar.user+", "+nvar.date)
@@ -249,7 +249,7 @@ misc_menu_actions  = {}
 def misc_menu():
 
     handleexit()
-    var = sp.getoutput("cat temp/var.txt")
+    var = sp.getoutput("cat temp/var.csv")
     clear()
     print ("Misc Tool Options")
     print ("By "+nvar.user+", "+nvar.date)
@@ -374,7 +374,7 @@ crypto_menu_actions  = {}
 def crypto_menu():
 
     handleexit()
-    var = sp.getoutput("cat temp/var.txt")
+    var = sp.getoutput("cat temp/var.csv")
     clear()
     print ("Cryptography Tool Options")
     print ("By "+nvar.user+", "+nvar.date)
@@ -493,7 +493,7 @@ hardware_menu_actions = {}
 def hardware_menu():
 
     handleexit()
-    var = sp.getoutput("cat temp/var.txt")
+    var = sp.getoutput("cat temp/var.csv")
     clear()
     print ("Hardware Tool Options")
     print ("By "+nvar.user+", "+nvar.date)
@@ -568,7 +568,7 @@ scan_menu_actions  = {}
 def scan_menu():
 
     handleexit()
-    var = sp.getoutput("cat temp/var.txt")
+    var = sp.getoutput("cat temp/var.csv")
     clear()
     print ("Prefabricated Scan Options")
     print ("By "+nvar.user+", "+nvar.date)
@@ -662,7 +662,7 @@ bluetooth_menu_actions  = {}
 def bluetooth_menu():
 
     handleexit()
-    var = sp.getoutput("cat temp/var.txt")
+    var = sp.getoutput("cat temp/var.csv")
     clear()
     print ("Bluetooth Tool Options")
     print ("By "+nvar.user+", "+nvar.date)
@@ -767,7 +767,7 @@ wifi_menu_actions  = {}
 def wifi_menu():
 
     handleexit()
-    var = sp.getoutput("cat temp/var.txt")
+    var = sp.getoutput("cat temp/var.csv")
     clear()
     print ("Wifi Tool Options")
     print ("By "+nvar.user+", "+nvar.date)
@@ -902,7 +902,7 @@ def main_menu():
     handleexit()
     clear()
     essid = check_essid()
-    #astatus = sp.getoutput("cat scrp/etc/animationstatus.txt")
+    #astatus = sp.getoutput("cat scrp/etc/animationstatus.csv")
     #if astatus == "0":
     #    animation()
     #elif astatus == "1":
