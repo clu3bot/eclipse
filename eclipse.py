@@ -83,7 +83,7 @@ def iptrace():
 
 #checks if the flag created by install.py exists to varify install requirements have been checked.
 def check_install():
-    check = sp.getoutput("cat etc/done_flag.csv")
+    check = sp.getoutput("cat bin/config/eclipse_config_done_flag.config")
     if check == 'done':
         pass
     else:
@@ -132,6 +132,9 @@ def check_essid():
         essid = "N/A"
         return essid
 
+def cleanup():
+    os.system("sudo bash scrp/tmp_cleanup.sh")
+
 def monitoron():
     os.system("sudo bash scrp/monhandler/monitormode.sh")
     main_menu()
@@ -146,7 +149,7 @@ def selectintmainmenu():
 
 def selectnet():
     clear()
-    os.system("sudo bash scrp/network.sh")
+    os.system("sudo bash scrp/networkhandler/networkselect.sh")
     main_menu()
 
 def publicip():   #fix to check internet/dns
@@ -893,6 +896,13 @@ def settings():
         pass
         settings()
         
+def check_essid():
+    if os.path.isfile("scrp/networkhandler/tmp/network_finale_tmp.csv"):
+        global essid   
+        essid = sp.getoutput("cat scrp/networkhandler/tmp/network_finale_tmp.csv")
+    else:
+        essid = color.red+"Not Selected"+color.none
+        pass
 
 #defines the main menu
 menu_actions  = {}  
@@ -900,8 +910,8 @@ menu_actions  = {}
 def main_menu():
     getinterface()
     handleexit()
+    check_essid()
     clear()
-    essid = check_essid()
     #astatus = sp.getoutput("cat scrp/etc/animationstatus.csv")
     #if astatus == "0":
     #    animation()
@@ -1039,6 +1049,7 @@ def onstartup():
     clear()
     permissions()
     check_install()
+    cleanup()
     updateprompt()
     monitorprompt()
     selectint()

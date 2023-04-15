@@ -282,7 +282,7 @@ def prompt():
 
 def export_done_flag():
     done_flag = 'done'
-    os.system("echo "+done_flag+" > etc/done_flag.csv")
+    os.system("echo "+done_flag+" > bin/config/eclipse_config_done_flag.config")
 
 def initialload():
     check_mdk3()
