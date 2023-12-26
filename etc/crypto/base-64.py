@@ -2,6 +2,9 @@ import base64
 import os
 import time
 
+def test():
+    time.sleep(1)
+
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -40,6 +43,7 @@ def encode():
     print("Encoded string: "+base64str)
 
     ask()
+
 
 def decode():
     clear()
